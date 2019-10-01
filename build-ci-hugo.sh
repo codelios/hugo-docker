@@ -1,5 +1,12 @@
 #!/bin/bash
 
+VERSIONS="
+    0.58.3
+    0.58.2
+    0.58.1
+    0.58.0
+"
+
 function build_image() {
     IFS=' '
     read -ra argarray <<< $1
