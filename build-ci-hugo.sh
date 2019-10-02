@@ -29,6 +29,8 @@ alpine 3.10 0.58.2
 debian 10-slim 0.58.2
 alpine 3.10 0.58.1
 debian 10-slim 0.58.1
+alpine 3.10 0.58.0
+debian 10-slim 0.58.0
 "
 
 IFS=$'\n' ;for word in $RELEASES; do
