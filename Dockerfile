@@ -23,7 +23,7 @@ RUN whoami \
     && mv $TMP_DIRECTORY/hugo /usr/local/bin \
     && ls -lt /usr/local/bin \
     && /usr/local/bin/hugo version \
-    && rm /tmp/hugo*.tar.gz \
+    && rm $TMP_DIRECTORY/hugo*.tar.gz \
     && rm LICENSE README.md
 
 WORKDIR /
