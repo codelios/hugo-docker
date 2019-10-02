@@ -23,9 +23,15 @@ ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_F
 
 RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECTORY
 
+WORKDIR ${TMP_DIRECTORY}
+
 RUN whoami \
     && mv $TMP_DIRECTORY/hugo /usr/local/bin \
     && ls -lt /usr/local/bin \
-    && /usr/local/bin/hugo version
+    && /usr/local/bin/hugo version \
+    && rm /tmp/hugo*.tar.gz \
+    && rm LICENSE README.md *.sh
+
+WORKDIR /
 
 EXPOSE 1313
