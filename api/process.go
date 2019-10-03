@@ -80,7 +80,7 @@ func validateHugoVersion(branchName string) error {
 		fmt.Printf("validateHugoVersion: Failed to checkout to branch: %s\n", err)
 		return err
 	}
-	err = runCommand("./replace.sh", branchName)
+	err = runCommand("/tmp/replace.sh", branchName)
 	if err != nil {
 		fmt.Printf("validateHugoVersion: Failed to execute replace.sh: %s\n", err)
 		return err
