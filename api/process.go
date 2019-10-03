@@ -51,18 +51,22 @@ func createLocalBranch(branchName string) error {
 	fmt.Printf("About to create local branch %s \n", branchName)
 	err := runCommand("git", "checkout", "master")
 	if err != nil {
+		fmt.Printf("Failed to checkout master - Begin: %s\n", err)
 		return err
 	}
 	err = runCommand("git", "checkout", "-b", branchName)
 	if err != nil {
+		fmt.Printf("Failed to create and checkout branch: %s\n", err)
 		return err
 	}
 	err = runCommand("git", "push", "--set-upstream", "origin", branchName)
 	if err != nil {
+		fmt.Printf("Failed to set upstream for branch: %s\n", err)
 		return err
 	}
 	err = runCommand("git", "checkout", "master")
 	if err != nil {
+		fmt.Printf("Failed to checkout master - End : %s\n", err)
 		return err
 	}
 	return nil
