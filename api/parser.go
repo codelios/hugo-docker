@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 	"time"
 )
@@ -19,12 +20,16 @@ const (
 
 	// NiceInterval represents the time to sleep before making a sucessive request
 	NiceInterval = 10 * time.Second
+
+	// ReleasesJSON represents the JSON file that contains the release info
+	ReleasesJSON = "hugo_releases.json"
 )
 
 // Release abstracts a small set of fields from the actual API
 type Release struct {
 	Name    string `json:"name"`
-	TagName string `json:"tag_name"`
+	TagName s	// TODO: Check if timestamp is out of date as well
+	tring `json:"tag_name"`
 	Body    string `json:"body"`
 }
 
@@ -96,4 +101,63 @@ func GetAllReleases() ([]Release, error) {
 		page++
 	}
 	return allReleases, nil
+}
+
+func checkReleasesJSON() bool {
+	if _, err := os.Stat(ReleasesJSON); err == nil {
+		// TODO: Check if timestamp is out of date as well
+		return true
+	} else if os.IsNotExist(err) {
+		return false
+	} else {
+		return false
+	}
+}
+
+func updateLatestReleaseInfo() error {
+	releases, err := GetAllReleases()
+	if err != nil {
+		return err
+	}
+	if len(releases) > 0 {
+		jsonString, err := json.Marshal(releases)
+		if err != nil {
+			return err
+		}
+		err = ioutil.WriteFile(ReleasesJSON, jsonString, os.ModePerm)
+		if err != nil {
+			return err
+		}
+	}
+	return err
+}
+
+func getLocalReleases() ([]Release, error) {
+	content, err := ioutil.ReadFile(ReleasesJSON)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAPIResponse(content)
+}
+
+// UpdateReleaseInfo updates the release information once a day from remote
+func UpdateReleaseInfo() error {
+	exists := checkReleasesJSON()
+	if !exists {
+		err := updateLatestReleaseInfo()
+		if err != nil {
+			return err
+		}
+	} else {
+		fmt.Println("Refreshing local data")
+	}
+	releases, err := getLocalReleases()
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Retrieved %d releases\n", len(releases))
+	for i := 0; i < len(releases); i++ {
+		fmt.Printf("%s\n", releases[i].Name)
+	}
+	return nil
 }
