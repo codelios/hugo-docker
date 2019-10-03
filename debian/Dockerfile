@@ -22,8 +22,6 @@ RUN apt-get -y update \
 
 COPY --from=0 /tmp/hugo /usr/local/bin
 
-RUN /usr/local/bin/hugo version
-
 WORKDIR /
 
 EXPOSE 1313
