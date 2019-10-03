@@ -5,6 +5,7 @@ FROM ${BASE_DISTRO}:${BASE_VERSION}
 LABEL description="Docker container for hugo static site generator to build CI ${BASE_DISTRO} ${BASE_VERSION}"
 LABEL maintainer="Karthik Kumar <support@malvahq.com>"
 
+ENV TMP_DIRECTORY=/tmp
 WORKDIR ${TMP_DIRECTORY}
 
 RUN apk update && apk upgrade \
@@ -13,7 +14,7 @@ RUN apk update && apk upgrade \
 ARG HUGO_VERSION=0.58.3
 ENV HUGO_VERSION=${HUGO_VERSION}
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
-ENV TMP_DIRECTORY=/tmp
+
 
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz $TMP_DIRECTORY
 
