@@ -3,7 +3,7 @@
 FROM alpine:3.10.1
 RUN apk update && apk upgrade \
     && rm -vrf /var/cache/apk/*
-ENV HUGO_VERSION=0.58.3
+ENV HUGO_VERSION=0.56.2
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
 ENV TMP_DIRECTORY=/tmp
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz $TMP_DIRECTORY
