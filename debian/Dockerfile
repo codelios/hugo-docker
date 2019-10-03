@@ -18,6 +18,7 @@ LABEL vendor="MalvaHQ"
 
 RUN apt-get -y update \
     && apt-get -y upgrade \
+    && apt-get -y install ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=0 /tmp/hugo /usr/local/bin
