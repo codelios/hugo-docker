@@ -39,8 +39,31 @@ func processReleases(releases []Release) error {
 	return nil
 }
 
+func runCommand(name string, arg ...string) error {
+	cmd := exec.Command(name, arg...)
+	err := cmd.Run()
+	if err != nil {
+		return err
+	}
+}
 func createLocalBranch(branchName string) error {
 	fmt.Printf("About to create local branch %s \n", branchName)
+	err := runCommand("git", "checkout", "master")
+	if err != nil {
+		return err
+	}
+	err = runCommand("git", "checkout", "-b", branchName)
+	if err != nil {
+		return err
+	}
+	err = runCommand("git", "push", "--set-upstream", "origin", branchName)
+	if err != nil {
+		return err
+	}
+	err = runCommand("git", "checkout", "master")
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
