@@ -11,7 +11,7 @@ WORKDIR ${TMP_DIRECTORY}
 RUN apk update && apk upgrade \
     && apk add --update libc6-compat libstdc++
 
-ARG HUGO_VERSION=0.58.3
+ARG HUGO_VERSION=0.55.1
 ENV HUGO_VERSION=${HUGO_VERSION}
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
 
