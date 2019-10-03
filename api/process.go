@@ -93,10 +93,8 @@ func validateHugoVersion(branchName string) error {
 	return nil
 }
 
-func processRelease(releaseName string, branchMap map[string]bool) error {
-	branchName := GetDockerBranchName(releaseName)
+func confirmBranch(branchName string, branchMap map[string]bool) error {
 	_, ok := branchMap[branchName]
-	fmt.Printf("%s -> %s -> %v \n", releaseName, branchName, ok)
 	if ok {
 		return nil
 	}
@@ -105,6 +103,16 @@ func processRelease(releaseName string, branchMap map[string]bool) error {
 		return err
 	}
 	branchMap[branchName] = true
+	return nil
+}
+
+func processRelease(releaseName string, branchMap map[string]bool) error {
+	branchName := GetDockerBranchName(releaseName)
+	err := confirmBranch(branchName, branchMap)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Validating: %s\n", branchName)
 	err = validateHugoVersion(branchName)
 	if err != nil {
 		return err
