@@ -45,6 +45,7 @@ func runCommand(name string, arg ...string) error {
 	if err != nil {
 		return err
 	}
+	return nil
 }
 func createLocalBranch(branchName string) error {
 	fmt.Printf("About to create local branch %s \n", branchName)
