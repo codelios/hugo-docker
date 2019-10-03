@@ -1,6 +1,3 @@
-ARG BASE_VERSION=3.10
-ARG BASE_DISTRO=alpine
-
 # Stage 1
 # This stage merely downloads the binary. So the base distro and version can be hardcoded as we see fit
 FROM alpine:3:10
@@ -15,7 +12,7 @@ RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECT
 
 # Stage 2
 # Use the base version specified
-FROM ${BASE_DISTRO}:${BASE_VERSION}
+FROM alpine:3:10
 
 LABEL description="Docker container for hugo static site generator - Alpine based"
 LABEL vendor="MalvaHQ"
