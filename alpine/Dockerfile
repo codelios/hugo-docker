@@ -10,7 +10,7 @@ ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_F
 RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECTORY \
     && rm $TMP_DIRECTORY/hugo*.tar.gz
 
-# Stage 2
+# Final Stage
 FROM alpine:3.10
 
 LABEL description="Docker container for hugo static site generator - Alpine based"
