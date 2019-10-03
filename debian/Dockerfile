@@ -1,28 +1,27 @@
-ARG BASE_VERSION=10-slim
-ARG BASE_DISTRO=debian
-FROM ${BASE_DISTRO}:${BASE_VERSION}
-
-LABEL description="Docker container for hugo static site generator to build CI - ${BASE_DISTRO} ${BASE_VERSION}"
-LABEL maintainer="Karthik Kumar <support@malvahq.com>"
-
-ENV TMP_DIRECTORY=/tmp
-WORKDIR ${TMP_DIRECTORY}
-
-RUN apt-get -y update && apt-get -y upgrade
-
-ARG HUGO_VERSION=0.56.2
-ENV HUGO_VERSION=${HUGO_VERSION}
+# Stage 1
+# This stage merely downloads the binary. So the base distro and version can be hardcoded as we see fit
+FROM alpine:3.10.1
+RUN apk update && apk upgrade \
+    && rm -vrf /var/cache/apk/*
+ENV HUGO_VERSION=0.58.3
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
-
+ENV TMP_DIRECTORY=/tmp
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz $TMP_DIRECTORY
-
 RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECTORY \
-    && whoami \
-    && mv $TMP_DIRECTORY/hugo /usr/local/bin \
-    && ls -lt /usr/local/bin \
-    && /usr/local/bin/hugo version \
-    && rm $TMP_DIRECTORY/hugo*.tar.gz \
-    && rm LICENSE README.md
+    && rm $TMP_DIRECTORY/hugo*.tar.gz
+
+# Final Stage
+FROM debian:10-slim
+
+LABEL description="Docker container for hugo static site generator - Debian based"
+LABEL vendor="MalvaHQ"
+
+RUN apt-get -y update \
+    && apt-get -y upgrade \
+    && apt-get -y install ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=0 /tmp/hugo /usr/local/bin
 
 WORKDIR /
 
