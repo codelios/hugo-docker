@@ -7,7 +7,7 @@ LABEL maintainer="Karthik Kumar <support@malvahq.com>"
 
 RUN apt-get -y update && apt-get -y upgrade
 
-ARG HUGO_VERSION=0.58.3
+ARG HUGO_VERSION=0.58.1
 ENV HUGO_VERSION=${HUGO_VERSION}
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
 ARG TMP_DIRECTORY=/tmp

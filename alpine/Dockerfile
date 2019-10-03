@@ -8,7 +8,7 @@ LABEL maintainer="Karthik Kumar <support@malvahq.com>"
 RUN apk update && apk upgrade \
     && apk add --update libc6-compat libstdc++
 
-ARG HUGO_VERSION=0.58.3
+ARG HUGO_VERSION=0.58.1
 ENV HUGO_VERSION=${HUGO_VERSION}
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
 ARG TMP_DIRECTORY=/tmp
