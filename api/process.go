@@ -100,10 +100,11 @@ func getDockerRemoteBranches() ([]string, error) {
 	output := make([]string, 0)
 	for i := 0; i < len(lines); i++ {
 		trimmedLine := strings.Trim(lines[i], " ")
-		if strings.HasPrefix(trimmedLine, BranchPrefixNeedle) {
-			thisBranch := trimmedLine[len(BranchPrefixNeedle):]
-			output = append(output, thisBranch)
+		if !strings.HasPrefix(trimmedLine, BranchPrefixNeedle) {
+			continue
 		}
+		thisBranch := trimmedLine[len(BranchPrefixNeedle):]
+		output = append(output, thisBranch)
 	}
 	return output, nil
 }
