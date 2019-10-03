@@ -31,7 +31,8 @@ func processReleases(releases []Release) error {
 		if len(releases[i].Name) == 0 {
 			continue
 		}
-		err := processRelease(releases[i].Name, branchMap)
+		trimmedName := strings.Trim(releases[i].Name, " ")
+		err := processRelease(trimmedName, branchMap)
 		if err != nil {
 			return err
 		}
