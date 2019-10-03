@@ -73,6 +73,20 @@ func createLocalBranch(branchName string) error {
 	return nil
 }
 
+func validateHugoVersion(branchName string) error {
+	err := runCommand("git", "checkout", branchName)
+	if err != nil {
+		fmt.Printf("validateHugoVersion: Failed to checkout to branch: %s\n", err)
+		return err
+	}
+	err = runCommand("git", "checkout", "master")
+	if err != nil {
+		fmt.Printf("validateHugoVersion: Failed to checkout back to master - End : %s\n", err)
+		return err
+	}
+	return nil
+}
+
 func processRelease(releaseName string, branchMap map[string]bool) error {
 	branchName := GetDockerBranchName(releaseName)
 	_, ok := branchMap[branchName]
@@ -85,6 +99,10 @@ func processRelease(releaseName string, branchMap map[string]bool) error {
 		return err
 	}
 	branchMap[branchName] = true
+	err = validateHugoVersion(branchName)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
