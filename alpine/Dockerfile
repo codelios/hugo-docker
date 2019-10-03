@@ -2,7 +2,7 @@ ARG BASE_VERSION=3.10
 ARG BASE_DISTRO=alpine
 FROM ${BASE_DISTRO}:${BASE_VERSION}
 
-LABEL description="Docker container for hugo static site generator to build CI"
+LABEL description="Docker container for hugo static site generator to build CI ${BASE_DISTRO} ${BASE_VERSION}"
 LABEL maintainer="Karthik Kumar <support@malvahq.com>"
 
 RUN apk update && apk upgrade \
