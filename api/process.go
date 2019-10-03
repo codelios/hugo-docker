@@ -104,7 +104,7 @@ func getDockerRemoteBranches() ([]string, error) {
 			continue
 		}
 		thisBranch := trimmedLine[len(BranchPrefixNeedle):]
-		output = append(output, thisBranch)
+		output = append(output, strings.Trim(thisBranch, " "))
 	}
 	return output, nil
 }
