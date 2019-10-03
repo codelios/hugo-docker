@@ -3,6 +3,7 @@
 FROM alpine:3.10.1
 RUN apk update && apk upgrade \
     && rm -vrf /var/cache/apk/*
+
 ENV HUGO_VERSION=0.55.2
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
 ENV TMP_DIRECTORY=/tmp
