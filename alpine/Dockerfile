@@ -1,27 +1,32 @@
 ARG BASE_VERSION=3.10
 ARG BASE_DISTRO=alpine
+
+# Stage 1
+# This stage merely downloads the binary. So the base distro and version can be hardcoded as we see fit
+FROM alpine:3:10
+RUN apk update && apk upgrade \
+    && rm -vrf /var/cache/apk/*
+ENV HUGO_VERSION=0.58.3
+ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
+ENV TMP_DIRECTORY=/tmp
+ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz $TMP_DIRECTORY
+RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECTORY \
+    && rm $TMP_DIRECTORY/hugo*.tar.gz
+
+# Stage 2
+# Use the base version specified
 FROM ${BASE_DISTRO}:${BASE_VERSION}
 
 LABEL description="Docker container for hugo static site generator - Alpine based"
-LABEL maintainer="Karthik Kumar <support@malvahq.com>"
-
-ENV TMP_DIRECTORY=/tmp
-WORKDIR ${TMP_DIRECTORY}
+LABEL vendor="MalvaHQ"
 
 RUN apk update && apk upgrade \
-    && apk add --update libc6-compat libstdc++
+    && apk add --update libc6-compat libstdc++ \
+    && rm -vrf /var/cache/apk/*
 
-ENV HUGO_VERSION=0.58.3
-ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
+COPY --from=0 /tmp/hugo /usr/local/bin
 
-
-ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz $TMP_DIRECTORY
-
-RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECTORY \
-    && mv $TMP_DIRECTORY/hugo /usr/local/bin \
-    && /usr/local/bin/hugo version \
-    && rm $TMP_DIRECTORY/hugo*.tar.gz \
-    && rm LICENSE README.md
+RUN /usr/local/bin/hugo version
 
 WORKDIR /
 
