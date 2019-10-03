@@ -48,6 +48,7 @@ func runCommand(name string, arg ...string) error {
 	}
 	return nil
 }
+
 func createLocalBranch(branchName string) error {
 	fmt.Printf("About to create local branch %s \n", branchName)
 	err := runCommand("git", "checkout", "master")
@@ -77,6 +78,11 @@ func validateHugoVersion(branchName string) error {
 	err := runCommand("git", "checkout", branchName)
 	if err != nil {
 		fmt.Printf("validateHugoVersion: Failed to checkout to branch: %s\n", err)
+		return err
+	}
+	err = runCommand("./replace.sh", branchName)
+	if err != nil {
+		fmt.Printf("validateHugoVersion: Failed to execute replace.sh: %s\n", err)
 		return err
 	}
 	err = runCommand("git", "checkout", "master")
