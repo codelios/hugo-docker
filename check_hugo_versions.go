@@ -1,33 +1,13 @@
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
-	"net/http"
+	"github.com/malvahq/ci-docker-hugo/api"
 )
-
-const (
-	// HugoURL represents an URL to get hugo releases
-	HugoURL = "https://api.github.com/repos/gohugoio/hugo/releases"
-)
-
-func checkHugoVersions() error {
-	resp, err := http.Get(HugoURL)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
-	fmt.Println(string(body))
-	return nil
-}
 
 func main() {
-	err := checkHugoVersions()
+	_, err := api.GetReleases()
 	if err != nil {
 		return
 	}
+
 }
