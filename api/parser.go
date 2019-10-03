@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -25,11 +26,15 @@ const (
 	ReleasesJSON = "hugo_releases.json"
 )
 
+var (
+	// ErrNoReleasesRetrieved represents an error when the API returns 0 releases
+	ErrNoReleasesRetrieved = errors.New("No releases were retrieved from remote api. Probably rate limited  ? ")
+)
+
 // Release abstracts a small set of fields from the actual API
 type Release struct {
 	Name    string `json:"name"`
-	TagName s	// TODO: Check if timestamp is out of date as well
-	tring `json:"tag_name"`
+	TagName string `json:"tag_name"`
 	Body    string `json:"body"`
 }
 
@@ -119,17 +124,18 @@ func updateLatestReleaseInfo() error {
 	if err != nil {
 		return err
 	}
-	if len(releases) > 0 {
-		jsonString, err := json.Marshal(releases)
-		if err != nil {
-			return err
-		}
-		err = ioutil.WriteFile(ReleasesJSON, jsonString, os.ModePerm)
-		if err != nil {
-			return err
-		}
+	if len(releases) == 0 {
+		return ErrNoReleasesRetrieved
 	}
-	return err
+	jsonString, err := json.Marshal(releases)
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile(ReleasesJSON, jsonString, os.ModePerm)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func getLocalReleases() ([]Release, error) {
@@ -139,6 +145,7 @@ func getLocalReleases() ([]Release, error) {
 	}
 	return ParseAPIResponse(content)
 }
+
 
 // UpdateReleaseInfo updates the release information once a day from remote
 func UpdateReleaseInfo() error {
@@ -156,8 +163,9 @@ func UpdateReleaseInfo() error {
 		return err
 	}
 	fmt.Printf("Retrieved %d releases\n", len(releases))
-	for i := 0; i < len(releases); i++ {
-		fmt.Printf("%s\n", releases[i].Name)
+	err = processReleases(releases)
+	if err != nil {
+		return err
 	}
 	return nil
 }
