@@ -1,6 +1,6 @@
 # Docker Image for Hugo Static Site Generator
 
-This docker image contains the `hugo` executable, representing the static site generator available at https://gohugo.io .
+This docker image contains the `hugo` `hugo` static site generator ( see https://gohugo.io )
 
 ## Usage
 
