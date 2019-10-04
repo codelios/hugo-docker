@@ -1,6 +1,11 @@
 # Docker Image for Hugo Static Site Generator
 
-This docker image contains the `hugo` static site generator ( see https://gohugo.io )
+Dockerfile containing the `hugo` static site generator ( see https://gohugo.io )
+
+The docker images are available at [malvahq/hugo in Dockerhub](https://hub.docker.com/r/malvahq/hugo).
+
+If you are looking to work in hugo inside a docker image/container, go ahead , spin it as below and give it a try.
+
 
 ## Usage
 
