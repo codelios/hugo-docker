@@ -5,13 +5,23 @@ This docker image contains the `hugo` executable, representing the static site g
 ## Usage
 
 ### Alpine
+
 ```
-docker pull malvahq/ci-hugo:0.58.3-alpine
+docker pull malvahq/hugo:latest-alpine
+```
+
+```
+docker pull malvahq/hugo:0.58.3-alpine
 ```
 
 ### Debian distribution
+
 ```
-docker pull malvahq/ci-hugo:0.58.3-debian
+docker pull malvahq/hugo:latest-debian
+```
+
+```
+docker pull malvahq/hugo:0.58.3-debian
 ```
 
 ## Hugo Path
