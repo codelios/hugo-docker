@@ -13,7 +13,7 @@ RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECT
 # Final Stage
 FROM alpine:3.10
 
-LABEL description="Docker container for hugo static site generator - Alpine based"
+LABEL description="Docker image for hugo static site generator - Alpine based"
 LABEL vendor="MalvaHQ"
 
 RUN apk update && apk upgrade \
