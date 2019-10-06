@@ -1,8 +1,6 @@
 # Stage 1
 # This stage merely downloads the binary. So the base distro and version can be hardcoded as we see fit
-FROM alpine:3.10.1
-RUN apk update && apk upgrade \
-    && rm -vrf /var/cache/apk/*
+FROM debian:10-slim
 ENV HUGO_VERSION=0.31.1
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
 ENV TMP_DIRECTORY=/tmp
