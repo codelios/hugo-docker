@@ -16,7 +16,7 @@ docker pull malvahq/hugo:latest-alpine
 ```
 
 ```
-docker pull malvahq/hugo:0.63.2-alpine
+docker pull malvahq/hugo:0.63.1-alpine
 ```
 
 ### Debian distribution
