@@ -12,7 +12,7 @@ RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECT
 FROM alpine:3.10.3
 
 LABEL description="Docker image for hugo static site generator - Alpine based"
-LABEL vendor="HeronCI"
+LABEL vendor="DubnioCI"
 
 RUN apk update && apk upgrade \
     && apk add --update libc6-compat libstdc++ ca-certificates \
