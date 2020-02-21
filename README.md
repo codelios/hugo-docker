@@ -12,11 +12,7 @@ If you are looking to work in hugo inside a docker image/container, go ahead , s
 ### Alpine
 
 ```
-docker pull feldci/hugo:latest-alpine
-```
-
-```
-docker pull feldci/hugo:0.65.2-alpine
+docker pull feldci/hugo:0.65.1-alpine
 ```
 
 ### Debian distribution
@@ -26,7 +22,7 @@ docker pull feldci/hugo:latest-debian
 ```
 
 ```
-docker pull feldci/hugo:0.65.2-debian
+docker pull feldci/hugo:0.65.1-debian
 ```
 
 ## Hugo Path
