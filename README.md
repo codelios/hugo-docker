@@ -2,7 +2,7 @@
 
 Dockerfile containing the `hugo` static site generator ( see https://gohugo.io )
 
-The docker images are available at [malvahq/hugo in Dockerhub](https://hub.docker.com/r/feldci/hugo).
+The docker images are available at [feldci/hugo in Dockerhub](https://hub.docker.com/r/feldci/hugo).
 
 If you are looking to work in hugo inside a docker image/container, go ahead , spin it as below and give it a try.
 
