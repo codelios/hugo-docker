@@ -1,7 +1,7 @@
 # Stage 1
 # This stage merely downloads the binary. So the base distro and version can be hardcoded as we see fit
 FROM debian:10-slim
-ENV HUGO_VERSION=0.64.1
+ENV HUGO_VERSION=0.65.2
 ENV HUGO_FILE_PREFIX="hugo_extended_${HUGO_VERSION}"
 ENV TMP_DIRECTORY=/tmp
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz $TMP_DIRECTORY

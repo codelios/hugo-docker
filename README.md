@@ -16,7 +16,7 @@ docker pull feldci/hugo:latest-alpine
 ```
 
 ```
-docker pull feldci/hugo:0.64.1-alpine
+docker pull feldci/hugo:0.65.2-alpine
 ```
 
 ### Debian distribution
@@ -26,7 +26,7 @@ docker pull feldci/hugo:latest-debian
 ```
 
 ```
-docker pull feldci/hugo:0.64.1-debian
+docker pull feldci/hugo:0.65.2-debian
 ```
 
 ## Hugo Path
