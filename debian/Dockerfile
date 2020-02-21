@@ -12,7 +12,7 @@ RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECT
 FROM debian:10-slim
 
 LABEL description="Docker image for hugo static site generator - Debian based"
-LABEL vendor="DubnioCI"
+LABEL vendor="FeldCI"
 
 RUN apt-get -y update \
     && apt-get -y upgrade \
