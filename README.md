@@ -19,6 +19,7 @@ docker pull codelios/hugo:latest-alpine
 docker pull codelios/hugo:0.67.1-alpine
 ```
 
+
 ### Debian distribution
 
 ```
