@@ -16,7 +16,7 @@ docker pull codelios/hugo:latest-alpine
 ```
 
 ```
-docker pull codelios/hugo:0.67.1-alpine
+docker pull codelios/hugo:0.68.0-alpine
 ```
 
 ### Debian distribution
@@ -26,7 +26,7 @@ docker pull codelios/hugo:latest-debian
 ```
 
 ```
-docker pull codelios/hugo:0.67.1-debian
+docker pull codelios/hugo:0.68.0-debian
 ```
 
 ## Hugo Path
