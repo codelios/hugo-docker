@@ -2,7 +2,7 @@
 
 Dockerfile containing the `hugo` static site generator ( see https://gohugo.io )
 
-The docker images are available at [feldci/hugo in Dockerhub](https://hub.docker.com/r/feldci/hugo).
+The docker images are available at [codelios/hugo in Dockerhub](https://hub.docker.com/r/codelios/hugo).
 
 If you are looking to work in hugo inside a docker image/container, go ahead , spin it as below and give it a try.
 
@@ -12,21 +12,21 @@ If you are looking to work in hugo inside a docker image/container, go ahead , s
 ### Alpine
 
 ```
-docker pull feldci/hugo:latest-alpine
+docker pull codelios/hugo:latest-alpine
 ```
 
 ```
-docker pull feldci/hugo:0.63.0-alpine
+docker pull codelios/hugo:0.63.0-alpine
 ```
 
 ### Debian distribution
 
 ```
-docker pull feldci/hugo:latest-debian
+docker pull codelios/hugo:latest-debian
 ```
 
 ```
-docker pull feldci/hugo:0.63.0-debian
+docker pull codelios/hugo:0.63.0-debian
 ```
 
 ## Hugo Path
