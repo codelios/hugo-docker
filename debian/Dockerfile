@@ -4,7 +4,7 @@ FROM debian:10-slim
 ENV HUGO_VERSION=0.20.3
 ENV HUGO_FILE_PREFIX="hugo_${HUGO_VERSION}"
 ENV TMP_DIRECTORY=/tmp
-ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz $TMP_DIRECTORY
+ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/v${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz $TMP_DIRECTORY
 RUN tar -xf $TMP_DIRECTORY/${HUGO_FILE_PREFIX}_Linux-64bit.tar.gz -C $TMP_DIRECTORY \
     && rm $TMP_DIRECTORY/hugo*.tar.gz
 
